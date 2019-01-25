@@ -66,3 +66,4 @@ I was inspired to do this project when I was working at home and my internet con
 
 ## Todo
 * Create custom sprites
+* Improve collision detection accuracy
