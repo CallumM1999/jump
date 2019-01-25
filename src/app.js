@@ -56,7 +56,7 @@ new Vue({
 				const gap = last ? last.w : 0;
 				return {
 					...this.sprites[Math.floor(Math.random() * this.sprites.length)],
-					x: 600 + gap + (Math.random() * this.MIN_GAP),
+					x: 600 + gap + this.MIN_GAP + (Math.random() * this.MIN_GAP),
 				};
 			}
 		},
@@ -162,7 +162,7 @@ new Vue({
 			this.player.energy = 0;
 
 			this.SCORE = 0;
-			this.speed = 2;
+			this.speed = 3;
 
 			this.DEAD = false;
 
@@ -193,7 +193,7 @@ new Vue({
 		},
 		updateScore() {
 			this.SCORE += .1;
-			if (this.SCORE > this.h_SCORE) this.h_SCORE = this.SCORE;
+			if (this.SCORE > this.H_SCORE) this.H_SCORE = this.SCORE;
 		},
 		updateSpeed() {
 			this.speed += this.acceleration;
@@ -276,7 +276,7 @@ new Vue({
 			this.ctx.textAlign = 'right';
 			this.ctx.fillStyle = '#000';
 			this.ctx.fillText(
-				this.h_SCORE ? `HI ${this.formatScore(Math.floor(this.h_SCORE))} ${this.formatScore(Math.floor(this.SCORE))}` : `${this.formatScore(Math.floor(this.SCORE))}`
+				this.H_SCORE ? `HI ${this.formatScore(Math.floor(this.H_SCORE))} ${this.formatScore(Math.floor(this.SCORE))}` : `${this.formatScore(Math.floor(this.SCORE))}`
 				, this.w - 10, 30);
 		},
 		drawPlayer() {
