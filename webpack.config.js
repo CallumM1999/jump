@@ -1,49 +1,59 @@
 const path = require('path');
 const webpack = require('webpack');
 
-module.exports = {
-	mode: 'production',
-	entry: {
-		index: path.resolve(__dirname, 'src', 'app.js'),
-		polyfills: path.resolve(__dirname, 'src', 'polyfills.js'),
-	},
+module.exports = env => {
+	const isProduction = env === 'production';
 
-	output: {
-		path: path.resolve(__dirname, 'public'),
-		filename: 'js/bundle.js',
-		filename: 'js/[name].bundle.js',
-	},
+	console.log('is production', isProduction);
 
-	resolve: {
-		alias: {
-			vue: 'vue/dist/vue.js'
-		}
-	},
+	return {
+		mode: isProduction ? 'production' : 'development',
+		entry: {
+			index: path.resolve(__dirname, 'src', 'app.js'),
+			polyfills: path.resolve(__dirname, 'src', 'polyfills.js'),
+		},
+		output: {
+			path: path.resolve(__dirname, 'public'),
+			filename: 'js/bundle.js',
+			filename: 'js/[name].bundle.js',
+		},
+		resolve: {
+			alias: {
+				vue: 'vue/dist/vue.js'
+			}
+		},
 
-	module: {
-		rules: [
-			{
-				test: /\.js$/,
-				exclude: /(node_modules|bower_components)/,
-				use: {
-					loader: 'babel-loader',
-					options: {
-						presets: ['@babel/preset-env']
+		module: {
+			rules: isProduction ? [
+				{
+					test: /\.js$/,
+					exclude: /(node_modules|bower_components)/,
+					use: {
+						loader: 'babel-loader',
+						options: {
+							presets: ['@babel/preset-env']
+						}
 					}
 				}
-			}
-		]
-	},
+			] : []
+		},
 
-	plugins: [
-		new webpack.DefinePlugin({
-			'process.env': {
-				// This has effect on the react lib size
-				'NODE_ENV': JSON.stringify('production'),
-			}
-		}),
-		new webpack.ProvidePlugin({
-			Vue: 'vue'
-		}),
-	]
+		plugins: [
+			new webpack.DefinePlugin({
+				'process.env': {
+					'NODE_ENV': JSON.stringify('production'),
+				}
+			}),
+			new webpack.ProvidePlugin({
+				Vue: 'vue'
+			}),
+		],
+
+		devtool: isProduction ? 'source-map' : 'inline-source-map',
+
+		devServer: {
+			contentBase: path.join(__dirname, 'public'),
+			historyApiFallback: true,
+		}
+	};
 };
