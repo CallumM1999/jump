@@ -12,7 +12,7 @@ A recreation of Chrome's T-Rex game.
 I was inspired to do this project when I was working at home and my internet connection cut out. I thought I could spend the otherwize unproductive time rebuilding the game.
 
 
-![Gameplay](https://github.com/CallumM1999/jump/blob/master/readme_assets/jump.gif)
+![Gameplay](https://github.com/thecallum/jump/blob/master/readme_assets/jump.gif)
 
 ### Built With
 
@@ -21,7 +21,7 @@ I was inspired to do this project when I was working at home and my internet con
 
 ### Authors
 
-* **Callum Macpherson** - [Callumm1999](https://github.com/CallumM1999)
+* **Callum Macpherson** - [thecallum](https://github.com/CallumM1999)
 
 
 
